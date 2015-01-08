@@ -7,12 +7,16 @@ class Blackjack
 	end
 
 	def play
-		@total -= 10
-		puts "Your cash total is #{:total}!"
+		
+		puts "Your cash total is #{@total}!"
 
-		dealer_hand = Deck.draw
-		hand = Deck.draw
+		@dealer_hand = Deck.draw
+		@hand = Deck.draw
 		puts "You have the cards #{hand}"
+		@total -= 10
+
+		puts "Your cash total is #{@total}!"
+
 
 		if hand == 21
 			puts "Congrats you won this hand!"
@@ -23,6 +27,8 @@ class Blackjack
 		
 		end
 	end
+
+#add quit function
 
 	def choice
 		while hand > 21
@@ -65,9 +71,8 @@ class Player
 end
 
 class Deck
-	attr_reader :cards
+	attr_accessor :draw , :hit, :shuffle, :cards
 	def initialize
-#may not have set up correctly
 		@cards = []
 		ace_cards = ([11] * 4)
 		reg_cards = ([2..9] * 4)
@@ -84,7 +89,7 @@ class Deck
 	end
 
 	def shuffle
-		@cards = @cards.shuffle
+		@cards.shuffle
 	end
 
 	def draw
@@ -101,4 +106,3 @@ puts "Let's get started!"
 
 game_start = Blackjack.new
 game_start.play
-
