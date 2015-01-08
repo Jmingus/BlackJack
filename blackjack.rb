@@ -10,8 +10,9 @@ class Blackjack
 		
 		puts "Your cash total is #{@total}!"
 
-		@dealer_hand = Deck.draw
-		@hand = Deck.draw
+		@dealer_hand = Deck.draw  #NoMethodError: undefined method `draw' for Blackjack::Deck:Class *sad face* -JH
+		@hand = Deck.draw         #You are calling draw on the Deck class itself and not on an instance of the deck class
+		                          #Remember that classes are like factories. You probably meant @deck.draw -JH
 		puts "You have the cards #{hand}"
 		@total -= 10
 
@@ -61,6 +62,8 @@ class Blackjack
 				end
 			end		
 		end
+	#You're missing and end here, because of that, the rest of the file is *inside* the Blackjack class.
+	#That is why you are getting a no method error for Deck.draw
 end
 
 class Player
@@ -77,11 +80,12 @@ class Deck
 		ace_cards = ([11] * 4)
 		reg_cards = ([2..9] * 4)
 		face_cards = ([10] * 16)
+		#I like the way you generated the deck cards - JH
 
 		ace_cards << cards
 		reg_cards << cards
 		face_cards << cards
-
+                #This is backwards. I think you meant to put the deck cards into the cards array. - JH
 	end
 
 	def total_cards
